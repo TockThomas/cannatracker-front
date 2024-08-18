@@ -1,5 +1,7 @@
 <script lang="ts">
-	import Login from './login/login.svelte'
+	import Login from './login/+page.svelte'
 </script>
 
-<Login/>
+<div class="w-full h-full flex items-center justify-around">
+	<Login />
+</div>
