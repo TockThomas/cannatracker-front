@@ -26,9 +26,9 @@
 	{#if data.loggedIn}
 		<nav class="fixed inset-x-0 bottom-0 bg-green-600 text-white p-4">
 			<ul class="flex justify-around">
-				<li><a class="hover:font-serif">Active plants</a></li>
-				<li><a class="hover:text-gray-400">Friends</a></li>
-				<li><a class="hover:text-gray-400">Settings</a></li>
+				<li><a href="/plants" class="hover:font-serif">Active plants</a></li>
+				<li><a href="/friends" class="hover:text-gray-400">Friends</a></li>
+				<li><a href="/settings" class="hover:text-gray-400">Settings</a></li>
 			</ul>
 		</nav>
 	{/if}
