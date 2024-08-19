@@ -1,9 +1,6 @@
 <script lang="ts">
-	import '../app.css'
-	import type { LayoutData } from './$types'
+	import { page } from '$app/stores'
 	import weed_colored from '$lib/assets/weed_leaf_colored.png'
-
-	export let data: LayoutData;
 </script>
 
 <svelte:head>
@@ -22,14 +19,4 @@
 	<div class="h-screen p-4 py-16">
 		<slot />
 	</div>
-
-	{#if data.loggedIn}
-		<nav class="fixed inset-x-0 bottom-0 bg-green-600 text-white p-4">
-			<ul class="flex justify-around">
-				<li><a class="hover:font-serif">Active plants</a></li>
-				<li><a class="hover:text-gray-400">Friends</a></li>
-				<li><a class="hover:text-gray-400">Settings</a></li>
-			</ul>
-		</nav>
-	{/if}
 </div>

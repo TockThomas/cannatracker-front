@@ -20,6 +20,20 @@ export const userLogin = async (param: LoginParam): Promise<string | null> => {
 	return null;
 };
 
+export const verifyToken = async (token: string): Promise<boolean> => {
+	if (token === '') {
+		return false;
+	}
+	let res = await fetch('http://localhost:8000/plants', {
+		method: 'GET',
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	});
+	return res.status === 200;
+
+}
+
 export const createPlant = async (accessToken: string, param: CreatePlant) => {
 	let plant = {
 		name: param.name,
