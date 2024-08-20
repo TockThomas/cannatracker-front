@@ -1,6 +1,6 @@
 import type { CreatePlant, CreateUser, LoginParam } from '$lib/models';
 
-const URL = 'https://cannatracker-back.azurewebsites.net';
+const URL = 'https://thegreenwizard.live';
 //const URL = 'http://localhost:8000';
 
 export const userLogin = async (param: LoginParam): Promise<string | null> => {
