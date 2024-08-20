@@ -1,7 +1,8 @@
 import type { CreatePlant, CreateUser, LoginParam } from '$lib/models';
 
-//const URL = 'https://cannatracker-back.azurewebsites.net';
-const URL = 'http://localhost:8000';
+const URL = 'https://cannatracker-back.azurewebsites.net';
+//const URL = 'http://localhost:8000';
+
 export const userLogin = async (param: LoginParam): Promise<string | null> => {
 	let message = [
 		['username', param.username],
