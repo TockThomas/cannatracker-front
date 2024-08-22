@@ -28,7 +28,7 @@
 			<ul class="flex justify-around">
 				<li><a href="/plants" class="hover:font-serif">Active plants</a></li>
 				<li><a href="/friends" class="hover:text-gray-400">Friends</a></li>
-				<li><a href="/settings" class="hover:text-gray-400">Settings</a></li>
+				<li><a href="/settings" class="hover:text-gray-400" disabled>Settings</a></li>
 			</ul>
 		</nav>
 	{/if}

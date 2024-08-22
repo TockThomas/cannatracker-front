@@ -10,9 +10,9 @@ export const actions = {
 		const data = await request.formData();
 		let friendsUsername = data.get('friendsUsername') ?? "";
 		let friend = await addFriend(accessToken, friendsUsername.toString());
-		if (!friend.hasOwnProperty('id')) {
+		/*if (!friend) {
 			return;
-		}
+		}*/
 		redirect(307, '/friends');
 	},
 	deleteFriend: async ({ cookies, request }) => {

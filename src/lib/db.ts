@@ -1,7 +1,7 @@
-import type { CreatePlant, CreateUser, LoginParam } from '$lib/models';
+import type { CreatePlant, CreateUser, Friend, LoginParam, PlantInDB, Schedule } from '$lib/models';
 
 const URL = 'https://thegreenwizard.live/api';
-//const URL = 'http://localhost:8000';
+// const URL = 'http://localhost:8000/api';
 
 export const userLogin = async (param: LoginParam): Promise<string | null> => {
 	let message = [
@@ -46,7 +46,7 @@ export const verifyToken = async (token: string): Promise<boolean> => {
 	if (token === '') {
 		return false;
 	}
-	let res = await fetch(URL + '/plants', {
+	let res = await fetch(URL + '/friends', {
 		method: 'GET',
 		headers: {
 			Authorization: `Bearer ${token}`,
@@ -61,8 +61,8 @@ export const createPlant = async (accessToken: string, param: CreatePlant) => {
 		name: param.name,
 		set_watering_period: param.setWateringPeriod,
 		set_watering_amount: param.setWateringAmount,
-		collaboration: param.collaboration,
-		schedules: [],
+		collaborators: param.collaborators,
+		schedules: param.schedules,
 		start_date: param.startDate
 	};
 	let res = await fetch(URL + '/plants', {
@@ -75,6 +75,27 @@ export const createPlant = async (accessToken: string, param: CreatePlant) => {
 	});
 	return await res.json();
 };
+
+export const getPlants = async (accessToken: string): Promise<PlantInDB[]> => {
+	let res = await fetch(URL + '/plants', {
+		method: 'GET',
+		headers: {
+			Authorization: `Bearer ${accessToken}`,
+			'Content-Type': 'application/json'
+		}
+	});
+	return await res.json();
+}
+
+export const waterPlant = async (accessToken: string, plantId: string) => {
+	let res = await fetch(URL + `/plants/${plantId}`, {
+		method: 'POST',
+		headers: {
+			Authorization: `Bearer ${accessToken}`,
+		}
+	});
+	return await res.json();
+}
 
 export const addFriend = async (accessToken: string, friendsUsername: string) => {
 	let res = await fetch(URL + `/friends/${friendsUsername}`, {
@@ -96,8 +117,19 @@ export const deleteFriend = async (accessToken: string, friendsUsername: string)
 	return await res.json();
 }
 
-export const getFriends = async (accessToken: string) => {
+export const getFriends = async (accessToken: string): Promise<Friend[]> => {
 	let res = await fetch(URL + '/friends', {
+		method: 'GET',
+		headers: {
+			Authorization: `Bearer ${accessToken}`,
+			'Content-Type': 'application/json'
+		}
+	});
+	return await res.json();
+}
+
+export const getTemplate = async (accessToken: string): Promise<Schedule> => {
+	let res = await fetch(URL + '/templates', {
 		method: 'GET',
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
