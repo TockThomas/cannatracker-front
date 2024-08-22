@@ -27,7 +27,7 @@ export type Plant = {
 	lastWatering: string
 	setWateringPeriod?: number,
 	setWateringAmount?: number,
-	schedule: Schedule
+	growStage: GrowStage,
 	wateringRecord: WateringRecordInDB[],
 	startDate: Date,
 	endDate: Date,
@@ -41,8 +41,8 @@ export type PlantInDB = {
 	name: string,
 	set_watering_period?: number,
 	set_watering_amount?: number,
-	schedule: Schedule
-	watering_record: WateringRecordInDB[],
+	schedule: ScheduleInDB
+	watering_records: WateringRecordInDB[],
 	start_date: Date,
 	end_date: Date,
 	created_date: Date,
@@ -55,21 +55,21 @@ export type Friend = {
 	username: string,
 }
 
-export type Fertilizer = {
+export type FertilizerInDB = {
 	name: string,
 	color: string,
-	amountPerLiter: number,
+	amount_per_liter: number,
 }
 
-export type GrowStages = {
+export type GrowStage = {
 	name: string,
-	fertilizer: Fertilizer[]
+	fertilizers: FertilizerInDB[]
 }
 
-export type Schedule = {
+export type ScheduleInDB = {
 	id: string,
 	name: string,
-	growStages: GrowStages,
+	grow_stages: GrowStage[],
 }
 
 export type WateringRecordInDB = {

@@ -1,4 +1,4 @@
-import type { CreatePlant, CreateUser, Friend, LoginParam, PlantInDB, Schedule } from '$lib/models';
+import type { CreatePlant, CreateUser, Friend, LoginParam, PlantInDB, ScheduleInDB } from '$lib/models';
 
 const URL = 'https://thegreenwizard.live/api';
 // const URL = 'http://localhost:8000/api';
@@ -128,7 +128,7 @@ export const getFriends = async (accessToken: string): Promise<Friend[]> => {
 	return await res.json();
 }
 
-export const getTemplate = async (accessToken: string): Promise<Schedule> => {
+export const getTemplate = async (accessToken: string): Promise<ScheduleInDB> => {
 	let res = await fetch(URL + '/templates', {
 		method: 'GET',
 		headers: {

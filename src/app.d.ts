@@ -1,14 +1,14 @@
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
 /// <reference types="svelte-adapter-azure-swa" />
-import type { Friend, PlantInDB } from '$lib/models';
+import type { Friend, Plant } from '$lib/models';
 
 declare global {
 	namespace App {
 		interface PageData {
 			loggedIn: boolean,
 			friends: Friend[],
-			plants: PlantInDB[]
+			plants: Plant[]
 		}
 		// interface Error {}
 		// interface Locals {}

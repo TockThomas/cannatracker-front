@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import type { PageData } from '../../../../.svelte-kit/types/src/routes/friends/$types';
-	import type { Friend, Schedule } from '$lib/models';
+	import type { Friend, ScheduleInDB } from '$lib/models';
 
 	export let data: PageData;
 	let friends: Friend[] = data.friends;
-	let templates: Schedule[] = data.templates;
+	let templates: ScheduleInDB[] = data.templates;
 	let collaborators: string[] = [];
 	let collaboratorInput: string = '';
 	let schedulesInput: string;

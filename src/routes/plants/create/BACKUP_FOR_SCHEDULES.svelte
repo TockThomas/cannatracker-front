@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import type { PageData } from '../../../../.svelte-kit/types/src/routes/friends/$types';
-	import type { Friend, Schedule } from '$lib/models';
+	import type { Friend, ScheduleInDB } from '$lib/models';
 
 	export let data: PageData;
 	let friends: Friend[] = data.friends;
 	let contributors: string[] = [];
 	let contributorInput: string = '';
-	let schedules: Schedule[] = [];
+	let schedules: ScheduleInDB[] = [];
 	function addContributor() {
 		friends.forEach(friend => {
 			if (friend.username === contributorInput && !contributors.includes(contributorInput)) {
