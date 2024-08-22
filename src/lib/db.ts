@@ -75,3 +75,34 @@ export const createPlant = async (accessToken: string, param: CreatePlant) => {
 	});
 	return await res.json();
 };
+
+export const addFriend = async (accessToken: string, friendsUsername: string) => {
+	let res = await fetch(URL + `/friends/${friendsUsername}`, {
+		method: 'POST',
+		headers: {
+			Authorization: `Bearer ${accessToken}`,
+		},
+	});
+	return await res.json();
+}
+
+export const deleteFriend = async (accessToken: string, friendsUsername: string) => {
+	let res = await fetch(URL + `/friends/${friendsUsername}`, {
+		method: 'DELETE',
+		headers: {
+			Authorization: `Bearer ${accessToken}`,
+		}
+	});
+	return await res.json();
+}
+
+export const getFriends = async (accessToken: string) => {
+	let res = await fetch(URL + '/friends', {
+		method: 'GET',
+		headers: {
+			Authorization: `Bearer ${accessToken}`,
+			'Content-Type': 'application/json'
+		}
+	});
+	return await res.json();
+}
