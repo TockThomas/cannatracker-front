@@ -11,7 +11,9 @@ export const actions = {
 		const data = await request.formData();
 		let plantId = data.get('plantId') ?? "";
 		await waterPlant(accessToken, plantId.toString());
-		redirect(307, '/plants');
+		return {
+			watered: true,
+		};
 	}
 };
 
@@ -23,20 +25,27 @@ export const load: PageServerLoad = async ({ cookies }) => {
 		let lastWatering;
 		let lastWateringInDays;
 		let wateringRecords = plantInDB.watering_records;
-		let now = new Date().getTime();
-		let lastDate;
+		let now = new Date();
+		let lastDate: Date;
 		let createdAt
 		let week;
 		let firstDay;
 		let growStage: GrowStage;
 		if (wateringRecords.length === 0) {
-			lastDate = new Date(plantInDB.start_date).getTime();
+			let startDate = new Date(plantInDB.start_date)
+			let year = startDate.getUTCFullYear();
+			let month = startDate.getUTCMonth();
+			let day = startDate.getUTCDate();
+			lastDate = new Date(year, month, day);
 		} else {
 			let lastWateringRecord = wateringRecords[wateringRecords.length - 1];
-			createdAt = lastWateringRecord.created_at;
-			lastDate = new Date(createdAt).getTime();
+			createdAt = new Date(lastWateringRecord.created_at);
+			let year = createdAt.getUTCFullYear();
+			let month = createdAt.getUTCMonth();
+			let day = createdAt.getUTCDate();
+			lastDate = new Date(year, month, day);
 		}
-		lastWateringInDays = Math.floor((now - lastDate) / (1000*60*60*24))
+		lastWateringInDays = Math.floor((now.getTime() - lastDate.getTime()) / (1000*60*60*24))
 		if (lastWateringInDays === 0) {
 			lastWatering = "today";
 		} else if (lastWateringInDays === 1) {

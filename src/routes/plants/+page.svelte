@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import type { PageData } from './$types';
+	import type { ActionData, PageData } from './$types';
 	import plantImg from '$lib/assets/plant.png'
 	import wateringImg from '$lib/assets/watering.png'
 	import type { Plant } from '$lib/models';
 
+	export let form: ActionData;
 	export let data: PageData;
 	export let plants: Plant[] = data.plants;
 	let selectedPlantId: string|null = null;
@@ -26,7 +27,11 @@
 								<img src="{plantImg}" alt="plant" class="size-16"/>
 								<div class="flex flex-col">
 									<h2>{name}</h2>
-									<p>Last watering: {lastWatering}</p>
+									{#if form?.watered}
+										<p>Last watering: today</p>
+									{:else}
+										<p>Last watering: {lastWatering}</p>
+									{/if}
 									<button type="button" on:click={() => expandPlant(id)}
 									class="flex justify-self-start collapsible">{growStage.name}</button>
 									{#if selectedPlantId === id}
@@ -44,10 +49,17 @@
 									{/if}
 									</div>
 								</div>
-							<button class="flex self-start pt-4">
-								<img src="{wateringImg}" alt="watering"
-							 		class="w-16 h-10 flex self-start" />
-							</button>
+							{#if (form?.watered || lastWatering === 'today')}
+								<button class="flex self-start pt-4" disabled>
+									<img src="{wateringImg}" alt="watering"
+											 class="w-16 h-10 flex self-start" />
+								</button>
+							{:else}
+								<button class="flex self-start pt-4">
+									<img src="{wateringImg}" alt="watering"
+										class="w-16 h-10 flex self-start" />
+								</button>
+							{/if}
 							</div>
 					</form>
 				</li>
