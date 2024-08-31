@@ -20,7 +20,7 @@
 		<ul>
 			{#each plants as { id, name, lastWatering, growStage }}
 				<li>
-					<form method="POST" action="?/water" use:enhance>
+					<form method="POST" action="?/water">
 						<input name="plantId" bind:value={id} hidden />
 						<div class="flex justify-between flex-nowrap">
 							<div class="flex">
@@ -49,7 +49,7 @@
 									{/if}
 									</div>
 								</div>
-							{#if (form?.watered || lastWatering === 'today')}
+							{#if lastWatering === 'today'}
 								<button class="flex self-start pt-4" disabled>
 									<img src="{wateringImg}" alt="watering"
 											 class="w-16 h-10 flex self-start" />
